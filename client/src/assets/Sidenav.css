@@ -1,0 +1,41 @@
+/* Sidenav.css */
+
+.side-nav {
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+}
+
+.side-nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; 
+}
+
+.side-nav li {
+  padding: 15px;
+  border-bottom: 1px solid #ddd; /* Add a border between list items */
+  margin: 5px 0; /* Add space between list items */
+}
+
+/* Style for the menu button in the navbar */
+.menu-btn {
+  cursor: pointer;
+}
+
+.close-btn {
+  color: white;
+  background-color: transparent;
+  display: block;
+  border: none;
+
+}

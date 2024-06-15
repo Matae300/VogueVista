@@ -1,32 +1,17 @@
 [
   {
-    "name": "Men's Clothing"
+    "name": "Handbags"
   },
   {
     "name": "Women's Clothing"
   },
   {
+    "name": "Mens's Clothing"
+  },
+  {
     "name": "Children's Clothing"
   },
   {
-    "name": "Footwear"
-  },
-  {
-    "name": "Accessories"
-  },
-  {
-    "name": "Sportswear"
-  },
-  {
-    "name": "Outerwear"
-  },
-  {
-    "name": "Underwear"
-  },
-  {
-    "name": "Formal Wear"
-  },
-  {
-    "name": "Casual Wear"
+    "name": "Jewlery"
   }
 ]

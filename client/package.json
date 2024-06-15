@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
+    "@stripe/stripe-js": "^1.54.0",
     "@fullcalendar/core": "^6.1.11",
     "@fullcalendar/daygrid": "^6.1.11",
     "@fullcalendar/multimonth": "^6.1.11",

@@ -1,8 +1,12 @@
 /* Navbar Styles */
 .navbar {
+  margin: 0;
+  top: 0;
+  width: 93%;
+  position: fixed;
   background-color: #ffffff; 
   padding: 10px 20px; 
-
+  z-index: 1;
 }
 
 .navbar-container {

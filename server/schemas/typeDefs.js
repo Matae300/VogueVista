@@ -1,5 +1,4 @@
 const typeDefs = `
-
 type User {
   _id: ID!
   username: String!
@@ -9,19 +8,21 @@ type User {
 
 type Product {
   _id: ID!
-  description: String!
-  price: Int!
-  category: Category!
+  name: String!
+  description: String
+  price: Float!
+  category: [Category]!
   size: String!
-  color: String!
+  color: [String!]!
   stock: Int!
   image: String!
-  rating: Int!
+  rating: Float!
 }
 
 type Order {
-  _id: ID!
-  products: [Product]!
+  _id: ID
+  purchaseDate: String
+  products: [Product]
 }
 
 type Category {
@@ -33,7 +34,11 @@ type Review {
   _id: ID!
   user: User!
   product: Product!
-  rating: Int!
+  rating: Float!
+}
+
+type Checkout {
+  session: ID
 }
 
 type Auth {
@@ -41,27 +46,38 @@ type Auth {
   user: User!
 }
 
+input ProductInput {
+  _id: ID
+  purchaseQuantity: Int
+  name: String
+  image: String
+  price: Float
+  quantity: Int
+}
+
+
 type Query {
   users: [User]!
   user(username: String!): User
   me: User
   products: [Product]!
-  product(id: ID!): Product
+  productById(id: ID!): Product
   orders: [Order]!
-  order(id: ID!): Order
+  orderById(id: ID!): Order
   categories: [Category]!
-  category(id: ID!): Category
+  categoryById(id: ID!): Category
   reviews: [Review]!
-  review(id: ID!): Review
+  reviewById(id: ID!): Review
 }
 
 type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth
   login(email: String!, password: String!): Auth
-  addProduct(description: String!, price: Int!, category: ID!, size: String!, color: String!, stock: Int!, image: String!, rating: Int!): Product
-  addOrder(products: [ID!]!): Order
-  addCategory(name: String!, description: String, image: String): Category
+  addOrder(products: [ID]!): Order
+  updateUser(firstName: String, lastName: String, email: String, password: String): User
+  updateProduct(_id: ID!, quantity: Int!): Product
   addReview(user: ID!, product: ID!, name: String!, rating: Int!): Review
+  deleteReview(id: ID!): Review
 }
 `;
 
