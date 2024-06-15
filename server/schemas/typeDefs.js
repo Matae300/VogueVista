@@ -7,11 +7,23 @@ type User {
   password: String
 }
 
+type Product {
+}
+
+type Order {
+}
+
+type Category {
+}
+
+type Review {
+}
+
 type Auth {
   token: ID!
   user: User
 }
-  
+
 type Query {
   users: [User]
   user(username: String!): User
