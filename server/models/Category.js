@@ -10,9 +10,9 @@ const categorySchema = new Schema({
     type: Schema.Types.ObjectId, 
     ref: 'Product'
   }],
-  collection: { 
+  collect: { 
     type: Schema.Types.ObjectId, 
-    ref: 'Collection' 
+    ref: 'Collect' 
   }
 });
 

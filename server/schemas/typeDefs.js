@@ -4,7 +4,8 @@ type User {
   username: String!
   email: String!
   password: String!
-  orders: [Order]!
+  cart: Cart
+  orders: [Order!]!
 }
 
 type Product {
@@ -12,7 +13,7 @@ type Product {
   name: String!
   description: String
   price: Float!
-  category: [Category]!
+  category: Category!
   size: String!
   color: [String!]!
   stock: Int!
@@ -20,15 +21,37 @@ type Product {
   rating: Float!
 }
 
-type Order {
-  _id: ID
-  purchaseDate: String
-  products: [Product]
-}
-
 type Category {
   _id: ID!
   name: String!
+  products: [Product!]!
+}
+
+type Collect {
+  _id: ID!
+  name: String!
+  categories: [Category!]!
+}
+
+type Cart {
+  _id: ID!
+  user: User!
+  items: [CartItem]!
+}
+
+type CartItem {
+  product: Product!
+  quantity: Int!
+}
+
+type Order {
+  _id: ID!
+  user: User!
+  orderNumber: String!
+  orderDate: String!
+  cart: Cart!
+  totalAmount: Float!
+  stripePaymentId: String!
 }
 
 type Review {
@@ -38,24 +61,10 @@ type Review {
   rating: Float!
 }
 
-type Checkout {
-  session: ID
-}
-
 type Auth {
   token: ID!
   user: User!
 }
-
-input ProductInput {
-  _id: ID
-  purchaseQuantity: Int
-  name: String
-  image: String
-  price: Float
-  quantity: Int
-}
-
 
 type Query {
   users: [User]!
@@ -67,6 +76,8 @@ type Query {
   orderById(id: ID!): Order
   categories: [Category]!
   categoryById(id: ID!): Category
+  collect: [Collect]!
+  collectById(id: ID!): Collect
   reviews: [Review]!
   reviewById(id: ID!): Review
 }
@@ -74,10 +85,79 @@ type Query {
 type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth
   login(email: String!, password: String!): Auth
-  addOrder(products: [ID]!): Order
-  updateUser(firstName: String, lastName: String, email: String, password: String): User
-  updateProduct(_id: ID!, quantity: Int!): Product
-  addReview(user: ID!, product: ID!, name: String!, rating: Int!): Review
+  addProduct(
+    name: String!
+    description: String
+    price: Float!
+    category: ID!
+    size: String!
+    color: [String!]!
+    stock: Int!
+    image: String!
+    rating: Float!
+  ): Product!
+  updateProduct(
+    id: ID!
+    name: String
+    description: String
+    price: Float
+    category: ID
+    size: String
+    color: [String]
+    stock: Int
+    image: String
+    rating: Float
+  ): Product!
+  deleteProduct(id: ID!): Product
+  addItemToCart(
+    userId: ID!
+    productId: ID!
+    quantity: Int!
+  ): Cart!
+  updateCartItem(
+    cartId: ID!
+    itemId: ID!
+    quantity: Int!
+  ): Cart!
+  removeItemFromCart(
+    cartId: ID!
+    itemId: ID!
+  ): Cart!
+  placeOrder(
+    userId: ID!
+    cartId: ID!
+    orderNumber: String!
+    orderDate: String!
+    totalAmount: Float!
+    stripePaymentId: String!
+  ): Order!
+  updateOrder(
+    id: ID!
+    totalAmount: Float
+    stripePaymentId: String
+  ): Order!
+  deleteOrder(id: ID!): Order
+  addCategory(name: String!): Category!
+  updateCategory(
+    id: ID!
+    name: String!
+  ): Category!
+  deleteCategory(id: ID!): Category
+  addCollect(name: String!): Collect!
+  updateCollect(
+    id: ID!
+    name: String!
+  ): Collect!
+  deleteCollect(id: ID!): Collect
+  addReview(
+    userId: ID!
+    productId: ID!
+    rating: Float!
+  ): Review!
+  updateReview(
+    id: ID!
+    rating: Float!
+  ): Review!
   deleteReview(id: ID!): Review
 }
 `;

@@ -111,48 +111,6 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     }, 
-    addOrder: async (parent, { products }, context) => {
-      if (context.user) {
-        const order = new Order({ products });
-
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-        return order;
-      }
-
-      throw AuthenticationError;
-    },
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-      }
-
-      throw AuthenticationError;
-    },
-    updateProduct: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
-
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-    },
-    addReview: async (_, { user, product, name, rating }) => {
-      try {
-        const review = await Review.create({ user, product, name, rating });
-        return review;
-      } catch (error) {
-        throw new Error('Failed to add review.');
-      }
-    },
-    deleteReview: async (_, { id }) => {
-      try {
-        const review = await Review.findByIdAndDelete(id);
-        if (!review) {
-          throw new Error('Review not found.');
-        }
-        return review;
-      } catch (error) {
-        throw new Error('Failed to delete review.');
-      }
-    },
   },
 };
 

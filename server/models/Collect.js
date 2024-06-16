@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const collectionSchema = new Schema({
+const collectSchema = new Schema({
   name: { 
     type: String, 
     required: true, 
@@ -12,6 +12,6 @@ const collectionSchema = new Schema({
   }]
 });
 
-const Collection = model('Collection', collectionSchema);
+const Collection = model('Collect', collectSchema);
 
 module.exports = Collection;
