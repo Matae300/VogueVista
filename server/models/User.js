@@ -19,6 +19,14 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  cart: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'Cart' 
+  },
+  orders: [{ 
+    type: Schema.Types.ObjectId, 
+    ref: 'Order' 
+  }]
 });
 
 userSchema.pre('save', async function (next) {

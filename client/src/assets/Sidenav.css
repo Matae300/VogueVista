@@ -27,7 +27,11 @@
   margin: 5px 0; /* Add space between list items */
 }
 
-/* Style for the menu button in the navbar */
+.side-nav li:hover {
+  color: #b9b9b9; 
+  cursor: pointer;
+}
+
 .menu-btn {
   cursor: pointer;
 }
@@ -37,5 +41,18 @@
   background-color: transparent;
   display: block;
   border: none;
+}
 
+.close-btn:hover {
+  color: #b9b9b9; 
+}
+
+.tile-link {
+  color: inherit; 
+  text-decoration: none; 
+  cursor: pointer; 
+}
+
+.tile-link:hover {
+  color: #b9b9b9;; 
 }

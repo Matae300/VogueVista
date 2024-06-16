@@ -2,10 +2,10 @@
 .navbar {
   margin: 0;
   top: 0;
-  width: 93%;
+  width: 90%;
   position: fixed;
   background-color: #ffffff; 
-  padding: 10px 20px; 
+  padding: 5px 25px; 
   z-index: 1;
 }
 
