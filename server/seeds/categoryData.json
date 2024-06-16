@@ -1,17 +1,26 @@
 [
   {
-    "name": "Handbags"
+    "categoryName": "Men's Clothing",
+    "products": [
+      { "productName": "Men's T-Shirt" },
+      { "productName": "Men's Jeans" }
+    ],
+    "collect": null
   },
   {
-    "name": "Women's Clothing"
+    "categoryName": "Women's Clothing",
+    "products": [
+      { "productName": "Women's Dress" },
+      { "productName": "Women's Blouse" }
+    ],
+    "collect": null
   },
   {
-    "name": "Mens's Clothing"
-  },
-  {
-    "name": "Children's Clothing"
-  },
-  {
-    "name": "Jewlery"
+    "categoryName": "Accessories",
+    "products": [
+      { "productName": "Sunglasses" },
+      { "productName": "Handbag" }
+    ],
+    "collect": null
   }
 ]

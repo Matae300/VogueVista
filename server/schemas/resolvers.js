@@ -1,4 +1,4 @@
-const { User, Product, Order, Category, Review } = require('../models');
+const { User, Product, Order, Category, Review, Cart, Collect } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -20,6 +20,14 @@ const resolvers = {
         return categories;
       } catch (error) {
         throw new Error('Failed to fetch categories.');
+      }
+    },
+    collect: async () => {
+      try {
+        const collect = await Collect.find();
+        return collect;
+      } catch (error) {
+        throw new Error('Failed to fetch collections.');
       }
     },
     orders: async () => {
@@ -56,9 +64,17 @@ const resolvers = {
     categoryById: async (parent, { _id }) => {  
       try {
         console.log("This is the id", _id);
-        return await Category.findOne({ _id });
+        return await Category.findById(_id);
       } catch (error) {
         throw new Error('Failed to fetch category by ID.');
+      }
+    },
+    collectById: async (parent, { _id }) => {  
+      try {
+        console.log("This is the id", _id);
+        return await Collect.findOne({ _id });
+      } catch (error) {
+        throw new Error('Failed to fetch collection by ID.');
       }
     },
     orderById: async (parent, { _id }) => {  
@@ -67,6 +83,14 @@ const resolvers = {
         return await Order.findOne({ _id });
       } catch (error) {
         throw new Error('Failed to fetch order by ID.');
+      }
+    },
+    cartById: async (parent, { _id }) => {  
+      try {
+        console.log("This is the id", _id);
+        return await Cart.findOne({ _id });
+      } catch (error) {
+        throw new Error('Failed to fetch cart by ID.');
       }
     },
     reviewById: async (parent, { _id }) => {  
@@ -111,6 +135,79 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     }, 
+    addProduct: async (_, args) => {
+      const {
+        productName,
+        description,
+        price,
+        category,
+        size,
+        color,
+        stock,
+        image,
+        rating,
+      } = args;
+
+      try {
+        const existingCategory = await Category.findById(category);
+        if (!existingCategory) {
+          throw new Error('Category not found.');
+        }
+
+        const newProduct = new Product({
+          productName,
+          description,
+          price,
+          category: existingCategory._id,
+          size,
+          color,
+          stock,
+          image,
+          rating,
+        });
+
+        await newProduct.save();
+        return newProduct;
+      } catch (error) {
+        throw new Error(`Failed to add product: ${error.message}`);
+      }
+    },
+    addCategory: async (_, { categoryName }) => {
+      try {
+        // Check if the category already exists
+        const existingCategory = await Category.findOne({ categoryName });
+        if (existingCategory) {
+          throw new Error('Category already exists');
+        }
+
+        // Create a new category
+        const newCategory = new Category({ categoryName });
+        await newCategory.save();
+
+        return newCategory;
+      } catch (error) {
+        throw new Error(`Failed to add category: ${error.message}`);
+      }
+    },
+    addCollect: async (_, { collectName, categories }, { models }) => {
+      try {
+        // Check if categories exist
+        const existingCategories = await Category.find({ _id: { $in: categories } });
+        if (existingCategories.length !== categories.length) {
+          throw new Error('One or more categories not found.');
+        }
+    
+        // Create the new Collect
+        const newCollect = new Collect({ collectName, categories });
+    
+        // Save the new Collect to the database
+        await newCollect.save();
+    
+        return newCollect;
+      } catch (error) {
+        throw new Error(`Failed to add collect: ${error.message}`);
+      }
+    },
   },
 };
 

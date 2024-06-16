@@ -10,8 +10,8 @@ type User {
 
 type Product {
   _id: ID!
-  name: String!
-  description: String
+  productName: String!
+  description: String!
   price: Float!
   category: Category!
   size: String!
@@ -23,13 +23,13 @@ type Product {
 
 type Category {
   _id: ID!
-  name: String!
+  categoryName: String!
   products: [Product!]!
 }
 
 type Collect {
   _id: ID!
-  name: String!
+  collectName: String!
   categories: [Category!]!
 }
 
@@ -74,6 +74,7 @@ type Query {
   productById(id: ID!): Product
   orders: [Order]!
   orderById(id: ID!): Order
+  cartById(id: ID!): Cart
   categories: [Category]!
   categoryById(id: ID!): Category
   collect: [Collect]!
@@ -86,7 +87,7 @@ type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth
   login(email: String!, password: String!): Auth
   addProduct(
-    name: String!
+    productName: String!
     description: String
     price: Float!
     category: ID!
@@ -98,7 +99,7 @@ type Mutation {
   ): Product!
   updateProduct(
     id: ID!
-    name: String
+    productName: String
     description: String
     price: Float
     category: ID
@@ -137,16 +138,16 @@ type Mutation {
     stripePaymentId: String
   ): Order!
   deleteOrder(id: ID!): Order
-  addCategory(name: String!): Category!
+  addCategory(categoryName: String!): Category!
   updateCategory(
     id: ID!
-    name: String!
+    categoryName: String!
   ): Category!
   deleteCategory(id: ID!): Category
-  addCollect(name: String!): Collect!
+  addCollect(collectName: String!, categories: [ID!]!): Collect!
   updateCollect(
     id: ID!
-    name: String!
+    collectName: String!
   ): Collect!
   deleteCollect(id: ID!): Collect
   addReview(
