@@ -189,12 +189,23 @@ const resolvers = {
         throw new Error(`Failed to add category: ${error.message}`);
       }
     },
-    addCollect: async (_, { collectName, categories }, { models }) => {
+    addCollect: async (_, { collectName, categories }) => {
       try {
+        // Check if the collect name is provided
+        if (!collectName) {
+          throw new Error('Collect name is required.');
+        }
+    
         // Check if categories exist
         const existingCategories = await Category.find({ _id: { $in: categories } });
         if (existingCategories.length !== categories.length) {
           throw new Error('One or more categories not found.');
+        }
+    
+        // Check if a collect with the same name already exists
+        const existingCollect = await Collect.findOne({ collectName });
+        if (existingCollect) {
+          throw new Error('A collect with the same name already exists.');
         }
     
         // Create the new Collect
@@ -207,7 +218,7 @@ const resolvers = {
       } catch (error) {
         throw new Error(`Failed to add collect: ${error.message}`);
       }
-    },
+    }    
   },
 };
 

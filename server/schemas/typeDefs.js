@@ -144,7 +144,7 @@ type Mutation {
     categoryName: String!
   ): Category!
   deleteCategory(id: ID!): Category
-  addCollect(collectName: String!, categories: [ID!]!): Collect!
+ addCollect(collectName: String!, categories: [ID!]!): Collect!
   updateCollect(
     id: ID!
     collectName: String!

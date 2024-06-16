@@ -1,26 +1,14 @@
 [
   {
-    "categoryName": "Men's Clothing",
-    "products": [
-      { "productName": "Men's T-Shirt" },
-      { "productName": "Men's Jeans" }
-    ],
-    "collect": null
+    "categoryName": "Men's Clothing"
   },
   {
-    "categoryName": "Women's Clothing",
-    "products": [
-      { "productName": "Women's Dress" },
-      { "productName": "Women's Blouse" }
-    ],
-    "collect": null
+    "categoryName": "Women's Clothing"
   },
   {
-    "categoryName": "Accessories",
-    "products": [
-      { "productName": "Sunglasses" },
-      { "productName": "Handbag" }
-    ],
-    "collect": null
+    "categoryName": "Accessories"
+  },
+  {
+    "categoryName": "Children's Clothing"
   }
 ]

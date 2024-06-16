@@ -1,10 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const collectSchema = new Schema({
-  collectName: { 
-    type: String, 
-    required: true, 
-    unique: true 
+  collectName: {
+    type: String,
+    required: true,
+    unique: true, 
   },
   categories: [{ 
     type: Schema.Types.ObjectId, 
@@ -12,6 +12,8 @@ const collectSchema = new Schema({
   }]
 });
 
-const Collection = model('Collect', collectSchema);
+collectSchema.index({ collectName: 1 }, { unique: true });
 
-module.exports = Collection;
+const Collect = model('Collect', collectSchema);
+
+module.exports = Collect;
