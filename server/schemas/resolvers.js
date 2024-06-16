@@ -1,4 +1,4 @@
-const { User, Product, Order, Category, Review, Cart, Collect } = require('../models');
+const { User, Product, Order, Category, Review, Collect } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -135,6 +135,37 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     }, 
+    addItemToCart: async (_, { userId, productId, quantity }) => {
+      try {
+        // Find the user and add item to cart
+        const user = await User.findById(userId);
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        // Call addToCart method to handle cart operations
+        await user.addToCart(productId, quantity);
+
+        // Return the updated user object (cart is already updated in addToCart method)
+        return user;
+      } catch (error) {
+        throw new Error(`Failed to add item to cart: ${error.message}`);
+      }
+    },
+    removeItemFromCart: async (_, { userId, itemId }) => {
+      try {
+        const user = await User.findById(userId);
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        await user.removeFromCart(itemId); // Use removeFromCart method
+
+        return user; // Return the updated user object
+      } catch (error) {
+        throw new Error(`Failed to remove item from cart: ${error.message}`);
+      }
+    },
     addProduct: async (_, args) => {
       const {
         productName,

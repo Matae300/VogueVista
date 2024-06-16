@@ -19,15 +19,48 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  cart: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'Cart' 
+  cart: {
+    items: [{
+      product: {
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        default: 1,
+      },
+    }],
   },
   orders: [{ 
     type: Schema.Types.ObjectId, 
     ref: 'Order' 
   }]
 });
+
+userSchema.methods.addToCart = function (productId, quantity = 1) {
+  const cartItem = this.cart.items.find(item => item.product.toString() === productId);
+  if (cartItem) {
+    cartItem.quantity += quantity;
+  } else {
+    this.cart.items.push({ product: productId, quantity });
+  }
+  return this.save();
+};
+
+userSchema.methods.removeFromCart = async function(itemId) {
+  try {
+    // Find the index of the item to remove
+    const index = this.cart.items.findIndex(item => item._id.toString() === itemId);
+    if (index !== -1) {
+      // Remove the item from the cart array
+      this.cart.items.splice(index, 1);
+    }
+    await this.save(); // Save the user with updated cart
+  } catch (error) {
+    throw new Error(`Failed to remove item from cart: ${error.message}`);
+  }
+};
 
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {

@@ -4,7 +4,7 @@ type User {
   username: String!
   email: String!
   password: String!
-  cart: Cart
+  cart: Cart!
   orders: [Order!]!
 }
 
@@ -115,13 +115,8 @@ type Mutation {
     productId: ID!
     quantity: Int!
   ): Cart!
-  updateCartItem(
-    cartId: ID!
-    itemId: ID!
-    quantity: Int!
-  ): Cart!
   removeItemFromCart(
-    cartId: ID!
+    userId: ID!
     itemId: ID!
   ): Cart!
   placeOrder(
