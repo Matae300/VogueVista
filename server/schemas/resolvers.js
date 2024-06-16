@@ -172,6 +172,9 @@ const resolvers = {
         throw new Error(`Failed to add product: ${error.message}`);
       }
     },
+    deleteProduct: async (parent, { deleteProductId }) => {
+      return Product.findOneAndDelete({ _id: deleteProductId });
+    },
     addCategory: async (_, { categoryName }) => {
       try {
         // Check if the category already exists
@@ -189,36 +192,30 @@ const resolvers = {
         throw new Error(`Failed to add category: ${error.message}`);
       }
     },
+    deleteCategory: async (parent, { deleteCategoryId }) => {
+      return Category.findOneAndDelete({ _id: deleteCategoryId });
+    },
     addCollect: async (_, { collectName, categories }) => {
       try {
-        // Check if the collect name is provided
-        if (!collectName) {
-          throw new Error('Collect name is required.');
-        }
-    
         // Check if categories exist
         const existingCategories = await Category.find({ _id: { $in: categories } });
         if (existingCategories.length !== categories.length) {
           throw new Error('One or more categories not found.');
         }
     
-        // Check if a collect with the same name already exists
-        const existingCollect = await Collect.findOne({ collectName });
-        if (existingCollect) {
-          throw new Error('A collect with the same name already exists.');
-        }
-    
         // Create the new Collect
         const newCollect = new Collect({ collectName, categories });
     
-        // Save the new Collect to the database
         await newCollect.save();
     
         return newCollect;
       } catch (error) {
         throw new Error(`Failed to add collect: ${error.message}`);
       }
-    }    
+    },
+    deleteCollect: async (parent, { deleteCollectId }) => {
+      return Collect.findOneAndDelete({ _id: deleteCollectId });
+    },
   },
 };
 

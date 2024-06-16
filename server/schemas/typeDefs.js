@@ -109,7 +109,7 @@ type Mutation {
     image: String
     rating: Float
   ): Product!
-  deleteProduct(id: ID!): Product
+  deleteProduct(deleteProductId: ID!): Product
   addItemToCart(
     userId: ID!
     productId: ID!
@@ -143,13 +143,13 @@ type Mutation {
     id: ID!
     categoryName: String!
   ): Category!
-  deleteCategory(id: ID!): Category
+ deleteCategory(deleteCategoryId: ID!): Category
  addCollect(collectName: String!, categories: [ID!]!): Collect!
   updateCollect(
     id: ID!
     collectName: String!
   ): Collect!
-  deleteCollect(id: ID!): Collect
+  deleteCollect(deleteCollectId: ID!): Collect
   addReview(
     userId: ID!
     productId: ID!
