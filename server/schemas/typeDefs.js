@@ -13,7 +13,6 @@ type Product {
   productName: String!
   description: String!
   price: Float!
-  category: Category!
   size: String!
   color: [String!]!
   stock: Int!
@@ -30,7 +29,7 @@ type Category {
 type Collect {
   _id: ID!
   collectName: String!
-  categories: [Category!]!
+  products: [Product!]!
 }
 
 type Cart {
@@ -90,7 +89,6 @@ type Mutation {
     productName: String!
     description: String
     price: Float!
-    category: ID!
     size: String!
     color: [String!]!
     stock: Int!
@@ -102,7 +100,6 @@ type Mutation {
     productName: String
     description: String
     price: Float
-    category: ID
     size: String
     color: [String]
     stock: Int
@@ -110,6 +107,22 @@ type Mutation {
     rating: Float
   ): Product!
   deleteProduct(deleteProductId: ID!): Product
+  removeProductToCategory(
+    productId: ID!
+    categoryId: ID!
+  ): Product
+  removeProductToCollect(
+    productId: ID!
+    collectId: ID!
+  ): Product
+  addProductToCategory(
+    productId: ID!
+    categoryId: ID!
+  ): Product
+  addProductToCollect(
+    productId: ID!
+    collectId: ID!
+  ): Product
   addItemToCart(
     userId: ID!
     productId: ID!
@@ -139,8 +152,8 @@ type Mutation {
     categoryName: String!
   ): Category!
  deleteCategory(deleteCategoryId: ID!): Category
- addCollect(collectName: String!, categories: [ID!]!): Collect!
-  updateCollect(
+ addCollect(collectName: String!): Collect!
+ updateCollect(
     id: ID!
     collectName: String!
   ): Collect!

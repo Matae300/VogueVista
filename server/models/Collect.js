@@ -6,9 +6,9 @@ const collectSchema = new Schema({
     required: true,
     unique: true, 
   },
-  categories: [{ 
+  products: [{ 
     type: Schema.Types.ObjectId, 
-    ref: 'Category' 
+    ref: 'Product'
   }]
 });
 

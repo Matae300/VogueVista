@@ -11,9 +11,20 @@ query Me {
 }`
 
 export const QUERY_CATEGORIES = gql`
-query Categories {
+query Category {
   categories {
     _id
-    name
+    categoryName
+  }
+}`
+
+export const QUERY_CATEGORIESBYID = gql`
+query CategoryById($categoryByIdId: ID!) {
+  categoryById(id: $categoryByIdId) {
+    _id
+    categoryName
+    products {
+      _id
+    }
   }
 }`;

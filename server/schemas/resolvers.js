@@ -1,6 +1,30 @@
 const { User, Product, Order, Category, Review, Collect } = require('../models');
 const { signToken } = require('../utils/auth');
 
+const removeProductFromCategory = async (parent, { productId }) => {
+  try {
+    const categories = await Category.updateMany(
+      { products: productId },
+      { $pull: { products: productId } }
+    );
+    return categories;
+  } catch (error) {
+    throw new Error(`Failed to remove product from category: ${error.message}`);
+  }
+};
+
+const removeProductFromCollection = async (parent, { productId }) => {
+  try {
+    const collections = await Collect.updateMany(
+      { products: productId },
+      { $pull: { products: productId } }
+    );
+    return collections;
+  } catch (error) {
+    throw new Error(`Failed to remove product from collection: ${error.message}`);
+  }
+};
+
 const resolvers = {
   Query: {
     users: async () => {
@@ -64,7 +88,7 @@ const resolvers = {
     categoryById: async (parent, { _id }) => {  
       try {
         console.log("This is the id", _id);
-        return await Category.findById(_id);
+        return await Category.findOne(_id);
       } catch (error) {
         throw new Error('Failed to fetch category by ID.');
       }
@@ -167,36 +191,30 @@ const resolvers = {
       }
     },
     addProduct: async (_, args) => {
+      // Create a new product
       const {
         productName,
         description,
         price,
-        category,
         size,
         color,
         stock,
         image,
         rating,
       } = args;
-
+    
       try {
-        const existingCategory = await Category.findById(category);
-        if (!existingCategory) {
-          throw new Error('Category not found.');
-        }
-
         const newProduct = new Product({
           productName,
           description,
           price,
-          category: existingCategory._id,
           size,
           color,
           stock,
           image,
           rating,
         });
-
+    
         await newProduct.save();
         return newProduct;
       } catch (error) {
@@ -204,16 +222,102 @@ const resolvers = {
       }
     },
     deleteProduct: async (parent, { deleteProductId }) => {
-      return Product.findOneAndDelete({ _id: deleteProductId });
+      try {
+        // Find and delete the product
+        const deletedProduct = await Product.findOneAndDelete({ _id: deleteProductId });
+        if (!deletedProduct) {
+          throw new Error('Product not found.');
+        }
+    
+        // Call the removeProductFromCategory resolver
+        await removeProductFromCategory(parent, { productId: deleteProductId });
+    
+        // Call the removeProductFromCollection resolver
+        await removeProductFromCollection(parent, { productId: deleteProductId });
+    
+        return deletedProduct;
+      } catch (error) {
+        throw new Error(`Failed to delete product: ${error.message}`);
+      }
     },
+    addProductToCategory: async (parent, { productId, categoryId }) => {
+      try {
+        // Find the product and category
+        const product = await Product.findById(productId);
+        const category = await Category.findById(categoryId);
+    
+        if (!product || !category) {
+          throw new Error('Product or category not found.');
+        }
+    
+        // Add the product to the category
+        category.products.push(productId);
+        await category.save();
+    
+        return product;
+      } catch (error) {
+        throw new Error(`Failed to add product to category: ${error.message}`);
+      }
+    },
+    removeProductToCategory: async (parent, { productId, categoryId }, { models }) => {
+      try {
+        // Find the product and category
+        const product = await models.Product.findById(productId);
+        const category = await models.Category.findById(categoryId);
+    
+        if (!product || !category) {
+          throw new Error('Product or category not found.');
+        }
+    
+        // Remove the product from the category
+        category.products.pull(productId);
+        await category.save();
+    
+        return product;
+      } catch (error) {
+        throw new Error(`Failed to remove product from category: ${error.message}`);
+      }
+    },
+    removeProductToCollect: async (parent, { productId, collectId }, { models }) => {
+      try {
+        // Find the product and collection
+        const product = await models.Product.findById(productId);
+        const collect = await models.Collect.findById(collectId);
+    
+        if (!product || !collect) {
+          throw new Error('Product or collection not found.');
+        }
+    
+        // Remove the product from the collection
+        collect.products.pull(productId);
+        await collect.save();
+    
+        return product;
+      } catch (error) {
+        throw new Error(`Failed to remove product from collection: ${error.message}`);
+      }
+    },        
+    addProductToCollect: async (parent, { productId, collectId }) => {
+      try {
+        // Find the product and collection
+        const product = await Product.findById(productId);
+        const collect = await Collect.findById(collectId);
+    
+        if (!product || !collect) {
+          throw new Error('Product or collection not found.');
+        }
+    
+        // Add the product to the collection
+        collect.products.push(productId);
+        await collect.save();
+    
+        return product;
+      } catch (error) {
+        throw new Error(`Failed to add product to collection: ${error.message}`);
+      }
+    },    
     addCategory: async (_, { categoryName }) => {
       try {
-        // Check if the category already exists
-        const existingCategory = await Category.findOne({ categoryName });
-        if (existingCategory) {
-          throw new Error('Category already exists');
-        }
-
         // Create a new category
         const newCategory = new Category({ categoryName });
         await newCategory.save();
@@ -226,16 +330,10 @@ const resolvers = {
     deleteCategory: async (parent, { deleteCategoryId }) => {
       return Category.findOneAndDelete({ _id: deleteCategoryId });
     },
-    addCollect: async (_, { collectName, categories }) => {
+    addCollect: async (_, { collectName }) => {
       try {
-        // Check if categories exist
-        const existingCategories = await Category.find({ _id: { $in: categories } });
-        if (existingCategories.length !== categories.length) {
-          throw new Error('One or more categories not found.');
-        }
-    
-        // Create the new Collect
-        const newCollect = new Collect({ collectName, categories });
+        // Create a new collection
+        const newCollect = new Collect({ collectName });
     
         await newCollect.save();
     
@@ -248,6 +346,7 @@ const resolvers = {
       return Collect.findOneAndDelete({ _id: deleteCollectId });
     },
   },
+  
 };
 
 module.exports = resolvers

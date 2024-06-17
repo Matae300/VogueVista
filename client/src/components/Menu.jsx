@@ -20,7 +20,7 @@ const Menu = ({ authToken }) => {
         {categories.map(category => (
           <Link to={`/category/${category._id}`} className="tile-link" key={category._id}>
             <li>
-              {category.name}
+              {category.categoryName}
             </li>
           </Link>
         ))}
