@@ -40,6 +40,8 @@ type Cart {
 
 type CartItem {
   product: Product!
+  size: String!
+  color: String!
   quantity: Int!
 }
 
@@ -126,6 +128,8 @@ type Mutation {
   addItemToCart(
     userId: ID!
     productId: ID!
+    size: String!
+    color: String!
     quantity: Int!
   ): Cart!
   removeItemFromCart(

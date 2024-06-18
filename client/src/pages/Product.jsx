@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { QUERY_PRODUCTBYID } from '../../utils/queries';
+import '../assets/ProductDetails.css'
 
 const ProductDetails = ({ authToken }) => {
   const { id } = useParams();
@@ -17,17 +18,18 @@ const ProductDetails = ({ authToken }) => {
 
   return (
     <div className="product-details">
-      <h1>{product.productName}</h1>
-      <div className="product-item">
+      <div className="item-info">
+        <h1>{product.productName}</h1>
         <p>Price: ${product.price}</p>
         <p>Stock: {product.stock}</p>
         <p>Rating: {product.rating}</p>
         <p>Size: {product.size}</p>
+      </div>
+      <div className="item-image">
         <img src={product.image} alt={product.productName} />
       </div>
     </div>
   );
 };
-
 
 export default ProductDetails;

@@ -28,7 +28,7 @@ const removeProductFromCollection = async (parent, { productId }) => {
 const resolvers = {
   Query: {
     users: async () => {
-      return await User.find();
+      return await User.find().populate('products');
     },
     products: async () => {
       try {
@@ -72,7 +72,7 @@ const resolvers = {
     },
     user: async (parent, { username }) => {
       try {
-        return await User.findOne({ username });
+        return await User.findOne({ username }).populate('products');
       } catch (error) {
         throw new Error('Failed to fetch user.');
       }
@@ -96,7 +96,7 @@ const resolvers = {
     collectById: async (parent, { _id }) => {  
       try {
         console.log("This is the id", _id);
-        return await Collect.findOne({ _id });
+        return await Collect.findOne({ _id }).populate('products');
       } catch (error) {
         throw new Error('Failed to fetch collection by ID.');
       }
@@ -107,14 +107,6 @@ const resolvers = {
         return await Order.findOne({ _id });
       } catch (error) {
         throw new Error('Failed to fetch order by ID.');
-      }
-    },
-    cartById: async (parent, { _id }) => {  
-      try {
-        console.log("This is the id", _id);
-        return await Cart.findOne({ _id });
-      } catch (error) {
-        throw new Error('Failed to fetch cart by ID.');
       }
     },
     reviewById: async (parent, { _id }) => {  
@@ -159,7 +151,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     }, 
-    addItemToCart: async (_, { userId, productId, quantity }) => {
+    addItemToCart: async (_, { userId, productId, quantity, size, color }) => {
       try {
         // Find the user and add item to cart
         const user = await User.findById(userId);
@@ -168,7 +160,7 @@ const resolvers = {
         }
 
         // Call addToCart method to handle cart operations
-        await user.addToCart(productId, quantity);
+        await user.addToCart(productId, quantity, size, color);
 
         // Return the updated user object (cart is already updated in addToCart method)
         return user;

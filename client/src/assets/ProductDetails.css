@@ -1,0 +1,15 @@
+.item-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item-info {
+  flex: 1;
+  padding-right: 20px; /* Adjust spacing between image and info */
+}
+
+.item-image img {
+  width: 200px; 
+  height: auto; 
+}

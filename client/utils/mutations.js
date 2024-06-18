@@ -13,6 +13,29 @@ mutation Mutation($username: String!, $email: String!, $password: String!) {
   }
 }`;
 
+export const ADDITEMTOCART = gql`
+mutation AddItemToCart($userId: ID!, $productId: ID!, $size: String!, $color: String!, $quantity: Int!) {
+  addItemToCart(userId: $userId, productId: $productId, size: $size, color: $color, quantity: $quantity) {
+    _id
+    items {
+      product {
+        _id
+        productName
+        description
+        price
+        size
+        color
+        stock
+        image
+        rating
+      }
+      size
+      color
+      quantity
+    }
+  }
+}`
+
 export const LOGIN_USER = gql`
 mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {

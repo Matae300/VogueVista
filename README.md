@@ -13,6 +13,9 @@ Welcome to VogueVista, your ultimate destination for trendy and stylish clothing
 - [Contributing](#contributing)
 - [License](#license)
 
+![Screenshot](./client/src/assets/images/screenshot1.jpeg)
+![Screenshot](./client/src/assets/images/screenshot2.jpeg)
+
 ## Features
 
 - **User Authentication:** Sign up and log in using JWT for secure authentication.
