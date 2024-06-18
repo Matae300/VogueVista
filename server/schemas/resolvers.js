@@ -77,18 +77,18 @@ const resolvers = {
         throw new Error('Failed to fetch user.');
       }
     },
-    productById: async (parent, { _id }) => {  
+    productById: async (parent, { productById }) => {  
       try {
-        console.log("This is the id", _id);
-        return await Product.findOne({ _id });
+        console.log("This is the id", productById);
+        return await Product.findById(productById);
       } catch (error) {
         throw new Error('Failed to fetch product by ID.');
       }
     },
-    categoryById: async (parent, { _id }) => {  
+    categoryById: async (parent, { categoryById }) => {  
       try {
-        console.log("This is the id", _id);
-        return await Category.findOne(_id);
+        console.log("This is the id", categoryById);
+        return await Category.findById(categoryById).populate('products');
       } catch (error) {
         throw new Error('Failed to fetch category by ID.');
       }

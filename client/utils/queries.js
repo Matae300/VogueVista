@@ -10,6 +10,20 @@ query Me {
   }
 }`
 
+export const QUERY_PRODUCTS = gql`
+query Products {
+  products {
+    _id
+    productName
+    price
+    size
+    color
+    stock
+    image
+    rating
+  }
+}`
+
 export const QUERY_CATEGORIES = gql`
 query Category {
   categories {
@@ -18,13 +32,34 @@ query Category {
   }
 }`
 
+export const QUERY_PRODUCTBYID = gql`
+query ProductById($productById: ID!) {
+  productById(productById: $productById) {
+    _id
+    productName
+    price
+    size
+    color
+    stock
+    image
+    rating
+  }
+}`
+
 export const QUERY_CATEGORIESBYID = gql`
-query CategoryById($categoryByIdId: ID!) {
-  categoryById(id: $categoryByIdId) {
+query CategoryById($categoryById: ID!) {
+  categoryById(categoryById: $categoryById) {
     _id
     categoryName
     products {
       _id
+      productName
+      price
+      stock
+      rating
+      size
+      image
+      color
     }
   }
 }`;

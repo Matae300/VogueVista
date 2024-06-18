@@ -16,11 +16,11 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
-  size: {
+  size: [{
     type: String,
     required: true,
     trim: true,
-  },
+  }],
   color: [{
     type: String,
     required: true,

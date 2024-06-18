@@ -13,7 +13,7 @@ type Product {
   productName: String!
   description: String!
   price: Float!
-  size: String!
+  size: [String!]!
   color: [String!]!
   stock: Int!
   image: String!
@@ -70,12 +70,12 @@ type Query {
   user(username: String!): User
   me: User
   products: [Product]!
-  productById(id: ID!): Product
+  productById(productById: ID!): Product
   orders: [Order]!
   orderById(id: ID!): Order
   cartById(id: ID!): Cart
   categories: [Category]!
-  categoryById(id: ID!): Category
+  categoryById(categoryById: ID!): Category
   collect: [Collect]!
   collectById(id: ID!): Collect
   reviews: [Review]!
@@ -89,7 +89,7 @@ type Mutation {
     productName: String!
     description: String
     price: Float!
-    size: String!
+    size: [String!]!
     color: [String!]!
     stock: Int!
     image: String!
@@ -100,7 +100,7 @@ type Mutation {
     productName: String
     description: String
     price: Float
-    size: String
+    size: [String!]!
     color: [String]
     stock: Int
     image: String
