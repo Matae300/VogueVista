@@ -44,13 +44,13 @@ const Navbar = () => {
         <ul className="nav-menu">
           <li className="nav-item">
             <Link to="/" className="nav-links">
-              👜
+              Cart
             </Link>
           </li>
           {!Auth.loggedIn() && (
             <li className="nav-item">
               <div className="nav-links dropdown-toggle" onClick={toggleDropdown}>
-                👤
+                Sign In
               </div>
               {isDropdownOpen && (
                 <div className="dropdown-menu">
