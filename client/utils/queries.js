@@ -32,6 +32,19 @@ query Category {
   }
 }`
 
+export const QUERY_USERCART = gql`
+query GetUserCart($userId: ID!) {
+  getUserCart(userId: $userId) {
+    items {
+      product {
+        _id
+      }
+      color
+      quantity
+      size
+    }
+  }`
+
 export const QUERY_PRODUCTBYID = gql`
 query ProductById($productById: ID!) {
   productById(productById: $productById) {

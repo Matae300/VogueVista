@@ -75,7 +75,7 @@ type Query {
   productById(productById: ID!): Product
   orders: [Order]!
   orderById(id: ID!): Order
-  cartById(id: ID!): Cart
+  getUserCart(userId: ID!): Cart
   categories: [Category]!
   categoryById(categoryById: ID!): Category
   collect: [Collect]!

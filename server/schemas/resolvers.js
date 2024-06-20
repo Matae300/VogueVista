@@ -28,7 +28,7 @@ const removeProductFromCollection = async (parent, { productId }) => {
 const resolvers = {
   Query: {
     users: async () => {
-      return await User.find().populate('products');
+      return await User.find().populate('cart');
     },
     products: async () => {
       try {
@@ -72,9 +72,23 @@ const resolvers = {
     },
     user: async (parent, { username }) => {
       try {
-        return await User.findOne({ username }).populate('products');
+        return await User.findOne({ username }).populate('cart.items.product');
       } catch (error) {
         throw new Error('Failed to fetch user.');
+      }
+    },
+    getUserCart: async (_, { userId }) => {
+      try {
+       // Find the user by ID and populate the cart field
+      const user = await User.findById(userId).populate('cart.items.product');
+    
+      if (!user) {
+        throw new Error('User not found');
+      }
+    
+      return user.cart;
+      } catch (error) {
+      throw new Error(`Failed to get user cart: ${error.message}`);
       }
     },
     productById: async (parent, { productById }) => {  

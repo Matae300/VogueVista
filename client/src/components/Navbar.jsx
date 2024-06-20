@@ -43,7 +43,7 @@ const Navbar = () => {
         </Link>
         <ul className="nav-menu">
           <li className="nav-item">
-            <Link to="/" className="nav-links">
+            <Link to="/cart/:id" className="nav-links">
               Cart
             </Link>
           </li>

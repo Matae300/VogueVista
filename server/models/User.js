@@ -29,7 +29,16 @@ const userSchema = new Schema({
       quantity: {
         type: Number,
         default: 1,
+        required: true,
       },
+      size: {
+        type: String,
+        required: true,
+      }, 
+      color: {
+        type: String,
+        required: true,
+      }, 
     }],
   },
   orders: [{ 
@@ -38,13 +47,19 @@ const userSchema = new Schema({
   }]
 });
 
-userSchema.methods.addToCart = function (productId, quantity = 1) {
+userSchema.methods.addToCart = function (productId, quantity = 1, size, color) {
   const cartItem = this.cart.items.find(item => item.product.toString() === productId);
+
   if (cartItem) {
+    // Update existing item's quantity, size, and color if they are provided
     cartItem.quantity += quantity;
+    if (size) cartItem.size = size;
+    if (color) cartItem.color = color;
   } else {
-    this.cart.items.push({ product: productId, quantity });
+    // Add new item to cart
+    this.cart.items.push({ product: productId, quantity, size, color });
   }
+
   return this.save();
 };
 
