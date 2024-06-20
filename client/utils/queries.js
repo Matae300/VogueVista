@@ -8,7 +8,7 @@ query Me {
     email
     password
   }
-}`
+}`;
 
 export const QUERY_PRODUCTS = gql`
 query Products {
@@ -22,7 +22,7 @@ query Products {
     image
     rating
   }
-}`
+}`;
 
 export const QUERY_CATEGORIES = gql`
 query Category {
@@ -30,20 +30,24 @@ query Category {
     _id
     categoryName
   }
-}`
+}`;
 
 export const QUERY_USERCART = gql`
-query GetUserCart($userId: ID!) {
-  getUserCart(userId: $userId) {
-    items {
-      product {
-        _id
+  query GetUserCart($userId: ID!) {
+    getUserCart(userId: $userId) {
+      items {
+        product {
+          _id
+          productName
+          image
+        }
+        color
+        quantity
+        size
       }
-      color
-      quantity
-      size
     }
-  }`
+  }
+`;
 
 export const QUERY_PRODUCTBYID = gql`
 query ProductById($productById: ID!) {
@@ -57,7 +61,7 @@ query ProductById($productById: ID!) {
     image
     rating
   }
-}`
+}`;
 
 export const QUERY_CATEGORIESBYID = gql`
 query CategoryById($categoryById: ID!) {

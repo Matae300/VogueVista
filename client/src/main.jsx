@@ -6,8 +6,6 @@ import Home from './pages/Home.jsx';
 import Collection from './pages/Collection.jsx';
 import Product from './pages/Product.jsx';
 import Cart from './pages/Cart.jsx'
-import { CardText } from 'react-bootstrap';
-
 
 const router = createBrowserRouter([
   {
@@ -28,9 +26,9 @@ const router = createBrowserRouter([
         element: <Product />
       }, 
       {
-        path: '/cart/:id',
+        path: '/cart',
         element: <Cart />
-      }
+      },
     ]
   }
 ])

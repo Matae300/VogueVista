@@ -56,10 +56,8 @@ const AddItemToCart = ({ authToken }) => {
       setQuantity(1);
       setErrorState('');
       setSuccess(true);
-
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
-      setSuccess(false);
     }
   };
 

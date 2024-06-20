@@ -1,0 +1,33 @@
+.cart-container {
+  padding: 20px;
+}
+
+.cart-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cart-item {
+  width: 100%;
+  max-width: 300px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item img {
+  width: 100%;
+  height: auto;
+}
+
+.cart-item-content {
+  padding: 10px;
+}
+
+.cart-item-content p {
+  margin: 5px 0;
+}
