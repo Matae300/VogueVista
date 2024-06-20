@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_PRODUCTBYID } from '../../utils/queries';
+import AddToCart from '../components/AddToCart'
 import '../assets/ProductDetails.css';
 
 const ProductDetails = ({ authToken }) => {
@@ -26,8 +27,7 @@ const ProductDetails = ({ authToken }) => {
         <p className="price">${product.price}</p>
         <p>Stock: {product.stock}</p>
         <p>Rating: {product.rating}</p>
-        <p>Size: {product.size}</p>
-        <a href="#" className="button">Add to Cart</a>
+        <AddToCart/>
       </div>
     </div>
   );
