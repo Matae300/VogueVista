@@ -15,6 +15,7 @@ Welcome to VogueVista, your ultimate destination for trendy and stylish clothing
 
 ![Screenshot](./client/src/assets/images/screenshot1.jpeg)
 ![Screenshot](./client/src/assets/images/screenshot2.jpeg)
+![Screenshot](./client/src/assets/images/screenshot3.jpeg)
 
 ## Features
 

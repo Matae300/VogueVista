@@ -1,3 +1,4 @@
+/* Form Styles */
 form {
   display: flex;
   flex-direction: column;
@@ -7,26 +8,35 @@ form {
 }
 
 label {
+  padding-right: 10px;
   font-size: 16px;
-  font-weight: bold;
+  margin-bottom: 5px; /* Add margin bottom for label alignment */
 }
 
-select, input {
-  padding: 8px;
+select,
+input {
+  padding: 10px; /* Adjusted input padding */
   font-size: 16px;
+  border: none; /* Add border for input fields */
+  border-radius: 5px;
+  transition: border-color 0.3s ease; /* Add transition for input border */
 }
 
-button {
-  padding: 10px 20px;
+/* Button Styles */
+.addbtn {
+  padding: 12px 22px; /* Adjusted button padding */
   font-size: 18px;
   font-weight: bold;
   color: #fff;
-  background-color: #333;
-  border: none;
-  border-radius: 5px;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 20px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Add transition properties */
 }
 
-button:hover {
-  background-color: #555;
+.addbtn:hover {
+  background-color: white;
+  color: black;
+  border-color: black; /* Updated border color for hover state */
 }

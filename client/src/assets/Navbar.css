@@ -42,6 +42,11 @@
   text-decoration: none;
 }
 
+.logout {
+  border: none;
+  background-color: transparent;
+}
+
 @media (max-width: 768px) {
   .navbar-container {
     flex-direction: column;

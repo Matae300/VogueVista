@@ -89,7 +89,7 @@ const AddItemToCart = ({ authToken }) => {
                 ))}
               </select>
             </div>
-            <button type="submit" className="btn btn-primary">Add Item To Cart</button>
+            <button type="submit" className="addbtn">Place In Cart</button>
           </>
         ) : (
           <p>You need to be logged in to add an item to the cart. Please log in or sign up.</p>

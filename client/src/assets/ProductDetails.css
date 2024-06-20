@@ -1,3 +1,4 @@
+/* Global Styles */
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   color: #333;
@@ -6,12 +7,13 @@ body {
   box-sizing: border-box;
 }
 
+/* Product Details Section */
 .product-details {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
-  max-width: 1200px;
+  max-width: 90%;
   margin: 0 auto;
 }
 
@@ -21,7 +23,7 @@ body {
 }
 
 .item-image img {
-  width: 100%;
+  width: 90%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -37,17 +39,17 @@ body {
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 20px;
+  text-transform: uppercase; /* Uppercase headings */
 }
 
 .item-info p {
   font-size: 20px;
   margin: 10px 0;
+  line-height: 1.5; /* Improved line height for readability */
 }
 
 .item-info .price {
   font-size: 24px;
-  font-weight: bold;
-  color: #b12704;
 }
 
 .item-info .button {
@@ -62,6 +64,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
+  text-transform: uppercase; /* Uppercase button text */
 }
 
 .item-info .button:hover {

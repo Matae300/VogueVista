@@ -76,7 +76,7 @@ const Navbar = () => {
           </li>
           {Auth.loggedIn() && (
             <li className="nav-item">
-              <button className="nav-links btn-light" onClick={logout}>
+              <button className="nav-links logout" onClick={logout}>
                 Logout
               </button>
             </li>

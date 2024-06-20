@@ -1,0 +1,38 @@
+.footer-container {
+  padding: 20px;
+  border-top: 1px solid #ddd; 
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-heading {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.footer-p {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.footer-links {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-icon {
+  font-size: 1.5em;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.footer-icon:hover {
+  color: #0056b3; 
+}
