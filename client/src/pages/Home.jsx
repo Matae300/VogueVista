@@ -7,7 +7,7 @@ import Header from '../assets/images/header.avif'
 import Woman from '../assets/images/womens.webp'
 import '../assets/Home.css'; 
 
-const Home = ({ authToken }) => {
+const Home = () => {
   return (
     <div>
       <div className="header-container">

@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Signup from './Signup';
-import Login from './Login';
 import Menu from './Menu';
 import Auth from '../../utils/auth';
 import '../assets/Navbar.css';
 
 const Navbar = () => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isSideNav, setSideNav] = useState(false);
 
   const toggleSidenav = () => {
@@ -16,11 +13,6 @@ const Navbar = () => {
     if (sideNav.classList.contains('active')) {
       sideNav.classList.remove('active');
     }
-  };
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-    document.querySelector('.dropdown-menu').classList.toggle('active');
   };
 
   const logout = (event) => {
@@ -39,7 +31,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          VogueVista
+        VogueVista
         </Link>
         <ul className="nav-menu">
           <li className="nav-item">
@@ -49,15 +41,11 @@ const Navbar = () => {
           </li>
           {!Auth.loggedIn() && (
             <li className="nav-item">
-              <div className="nav-links dropdown-toggle" onClick={toggleDropdown}>
+              <Link to="/login">
+              <div className="nav-links dropdown-toggle">
                 Sign In
               </div>
-              {isDropdownOpen && (
-                <div className="dropdown-menu">
-                  <Signup />
-                  <Login />
-                </div>
-              )}
+              </Link>
             </li>
           )}
           <li className="nav-item">

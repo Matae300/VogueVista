@@ -1,10 +1,10 @@
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
 import { QUERY_USERCART, QUERY_ME } from "../../utils/queries";
 import '../assets/Cart.css'; // Import external CSS file
 
 const Cart = ({ authToken }) => {
-  const { id } = useParams();
 
   const { loading: meLoading, error: meError, data: meData } = useQuery(QUERY_ME, {
     context: { headers: { Authorization: `Bearer ${authToken}` } },
@@ -27,15 +27,17 @@ const Cart = ({ authToken }) => {
       <h1>Cart</h1>
       <div className="cart-items">
         {cart.items.map((item) => (
-          <div key={item.product._id} className="cart-item">
-            <img src={item.product.image} alt={item.product.productName} />
-            <div className="cart-item-content">
-              <p>{item.product.productName}</p>
-              <p>Color: {item.color}</p>
-              <p>Quantity: {item.quantity}</p>
-              <p>Size: {item.size}</p>
+          <Link to={`/product/${item.product._id}`} className="tile-link" key={item.product._id}>
+            <div key={item.product._id} className="cart-item">
+              <img src={item.product.image} alt={item.product.productName} />
+              <div className="cart-item-content">
+                <p>{item.product.productName}</p>
+                <p>Color: {item.color}</p>
+                <p>Quantity: {item.quantity}</p>
+                <p>Size: {item.size}</p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

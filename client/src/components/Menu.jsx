@@ -24,12 +24,16 @@ const Menu = ({ authToken }) => {
             </li>
           </Link>
         ))}
+        <Link to='/login' className="tile-link">
         <li>
           Sign In
         </li>
+        </Link>
+        <Link to='/cart' className="tile-link">
         <li>
           My Orders
         </li>
+        </Link>
       </ul>
     </div>
   );
