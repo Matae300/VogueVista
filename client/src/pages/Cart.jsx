@@ -58,7 +58,7 @@ const Cart = ({ authToken }) => {
                     <p>Quantity: {item.quantity}</p>
                     <p>Size: {item.size}</p>
                     <button className='addbtn' onClick={() => handleRemoveItem(userId, productId)}>
-                      {removeLoading ? 'Removing...' : 'Remove'}
+                      {removeLoading ? 'Removing...' : 'Remove Item'}
                     </button>
                   </div>
                 </div>

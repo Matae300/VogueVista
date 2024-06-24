@@ -36,8 +36,8 @@ const Signup = () => {
   };
 
   return (
-      <div className="signup-container">
-        <div className="">
+      <div className="login-container">
+        <div className="login-form-container">
           <h3 className='signup-text'>CREATE AN ACCOUNT</h3>
           <div className="">
             {data ? (
@@ -47,7 +47,7 @@ const Signup = () => {
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
-                  className="signup-form-input"
+                  className="login-input"
                   placeholder="Your username"
                   name="username"
                   type="text"
@@ -55,7 +55,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="signup-form-input"
+                  className="login-input"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -63,7 +63,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="signup-form-input"
+                  className="login-input"
                   placeholder="******"
                   name="password"
                   type="password"
@@ -71,7 +71,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <button
-                  className="signup-button"
+                  className="login-button"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >

@@ -1,0 +1,28 @@
+.login-form-container h3 {
+  text-align: center;
+  margin-top: 70px;
+}
+
+.login-input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.login-button {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: black;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.login-button:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
