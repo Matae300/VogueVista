@@ -182,14 +182,14 @@ const resolvers = {
         throw new Error(`Failed to add item to cart: ${error.message}`);
       }
     },
-    removeItemFromCart: async (_, { userId, itemId }) => {
+    removeItemFromCart: async (_, { userId, productId }) => {
       try {
         const user = await User.findById(userId);
         if (!user) {
           throw new Error('User not found');
         }
 
-        await user.removeFromCart(itemId); // Use removeFromCart method
+        await user.removeFromCart(productId); // Use removeFromCart method
 
         return user; // Return the updated user object
       } catch (error) {

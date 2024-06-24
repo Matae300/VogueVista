@@ -63,10 +63,10 @@ userSchema.methods.addToCart = function (productId, quantity = 1, size, color) {
   return this.save();
 };
 
-userSchema.methods.removeFromCart = async function(itemId) {
+userSchema.methods.removeFromCart = async function(productId) {
   try {
     // Find the index of the item to remove
-    const index = this.cart.items.findIndex(item => item._id.toString() === itemId);
+    const index = this.cart.items.findIndex(item => item.product._id.toString() === productId);
     if (index !== -1) {
       // Remove the item from the cart array
       this.cart.items.splice(index, 1);

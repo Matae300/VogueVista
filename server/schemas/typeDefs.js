@@ -134,7 +134,7 @@ type Mutation {
   ): Cart!
   removeItemFromCart(
     userId: ID!
-    itemId: ID!
+    productId: ID!
   ): Cart!
   placeOrder(
     userId: ID!

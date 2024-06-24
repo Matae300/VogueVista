@@ -13,6 +13,13 @@ mutation Mutation($username: String!, $email: String!, $password: String!) {
   }
 }`;
 
+export const REMOVE_ITEM_FROM_CART = gql`
+mutation RemoveItemFromCart($userId: ID!, $productId: ID!) {
+  removeItemFromCart(userId: $userId, productId: $productId) {
+    _id
+  }
+}`;
+
 export const ADDITEMTOCART = gql`
 mutation AddItemToCart($userId: ID!, $productId: ID!, $size: String!, $color: String!, $quantity: Int!) {
   addItemToCart(userId: $userId, productId: $productId, size: $size, color: $color, quantity: $quantity) {
