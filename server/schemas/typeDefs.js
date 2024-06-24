@@ -79,7 +79,7 @@ type Query {
   categories: [Category]!
   categoryById(categoryById: ID!): Category
   collect: [Collect]!
-  collectById(id: ID!): Collect
+  collectById(_id: ID!): Collect
   reviews: [Review]!
   reviewById(id: ID!): Review
 }

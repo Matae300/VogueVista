@@ -24,6 +24,24 @@ query Products {
   }
 }`;
 
+export const QUERY_COLLECTBYID = gql`
+query collectById($id: ID!) {
+  collectById(_id: $id) {
+    _id
+    collectName
+    products {
+      _id
+      productName
+      price
+      size
+      color
+      stock
+      image
+      rating
+    }
+  }
+}`;
+
 export const QUERY_CATEGORIES = gql`
 query Category {
   categories {
@@ -72,11 +90,11 @@ query CategoryById($categoryById: ID!) {
       _id
       productName
       price
-      stock
-      rating
       size
-      image
       color
+      stock
+      image
+      rating
     }
   }
 }`;

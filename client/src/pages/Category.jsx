@@ -1,27 +1,25 @@
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { QUERY_COLLECTBYID } from '../../utils/queries';
+import { QUERY_CATEGORIESBYID } from '../../utils/queries';
 import '../assets/Collection.css';
 
-const Collection = ({ authToken }) => {
+const Category = ({ authToken }) => {
   const { id } = useParams();
 
-  const { loading, error, data } = useQuery(QUERY_COLLECTBYID, {
-    variables: { id: id }, 
+  const { loading, error, data } = useQuery(QUERY_CATEGORIESBYID, {
+    variables: { categoryById: id }, 
     context: { headers: { Authorization: `Bearer ${authToken}` } },
   });
-
-  console.log(data)
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const collect = data?.collectById;
-  const products = collect?.products || [];
+  const category = data?.categoryById;
+  const products = category?.products || [];
 
   return (
     <div className="collection-container">
-      <h3 className="category-title">{collect?.collectName}</h3>
+      <h3 className="category-title">{category?.categoryName}</h3>
       <div className="product-list">
         {products.length > 0 ? (
           products.map(product => (
@@ -36,11 +34,11 @@ const Collection = ({ authToken }) => {
             </Link>
           ))
         ) : (
-          <p>No products found in this collection.</p>
+          <p>No products found in this category.</p>
         )}
       </div>
     </div>
   );
 };
 
-export default Collection;
+export default Category;

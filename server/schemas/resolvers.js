@@ -110,9 +110,15 @@ const resolvers = {
     collectById: async (parent, { _id }) => {  
       try {
         console.log("This is the id", _id);
-        return await Collect.findOne({ _id }).populate('products');
+        const collection = await Collect.findById(_id).populate('products');
+        
+        if (!collection) {
+          throw new Error('Collection not found.');
+        }
+    
+        return collection;
       } catch (error) {
-        throw new Error('Failed to fetch collection by ID.');
+        throw new Error(`Failed to fetch collection by ID: ${error.message}`);
       }
     },
     orderById: async (parent, { _id }) => {  
